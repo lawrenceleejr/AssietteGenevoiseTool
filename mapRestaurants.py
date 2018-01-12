@@ -1,16 +1,33 @@
 #!/usr/bin/env python2
 
 from __future__ import print_function
-import gmplot
+import io
 
+import gmplot
+import time
+
+import json
+
+from collections import namedtuple
+
+def _json_object_hook(d): return namedtuple('X', d.keys())(*d.values())
+def json2obj(data): return json.loads(data, object_hook=_json_object_hook)
+
+# timeout variable can be omitted, if you use specific value in the while condition
+timeout = 2   # [seconds]
 
 
 class restaurantObject(object):
 	def __init__(self,name):
 		self.name = name
-		while(1):
+		self.coordinates = (0,0)
+		self.valid = False
+
+		timeout_start = time.time()
+		while time.time() < timeout_start + timeout:
 			try:
-				self.coordinates = gmap.geocode(name + " geneva")
+				self.coordinates = gmap.geocode(name.encode('ascii','replace') + " geneva")
+				self.valid = True
 				break
 			except:
 				continue
@@ -44,7 +61,7 @@ class Map(object):
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {{
 				return function() {{
-					infowindow.setContent("{name} {name}");
+					infowindow.setContent("{name}<br> {name}");
 					infowindow.open(map, marker);
 				}}
 			}})(marker,i) );
@@ -54,8 +71,8 @@ class Map(object):
 			""".format(
 				lat=restaurant.coordinates[0],
 				lon=restaurant.coordinates[1],
-				name=restaurant.name,
-				description="\n".join([restaurant.name,"test"]) )  for restaurant in self._points
+				name=restaurant.name.encode('ascii', 'xmlcharrefreplace'),
+				description="test" )  for restaurant in self._points
 			]
 			)
 		return """
@@ -92,10 +109,17 @@ if __name__ == "__main__":
 	map = Map()
 	map.set_center(*genevaCoordinates)
 
-	map.add_point( restaurantObject("Clubhouse") )
-	map.add_point( restaurantObject("Holy Cow") )
+	with io.open('listOfRestaurants.txt','r', encoding='utf-8', errors='replace') as f:
+		for i,line in enumerate(f):
+			restaurant = restaurantObject(line.strip())
+			print(restaurant.name.encode('ascii', 'xmlcharrefreplace'))
+			if restaurant.valid:
+				map.add_point( restaurant )
+			if i>5:
+				break
+			# map.add_point( restaurantObject("Holy Cow") )
 
-	with open("output.html", "w") as out:
+	with open("AssietteGenevoiseMap.html", "w") as out:
 		print(map, file=out)
 
 
