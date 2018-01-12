@@ -115,8 +115,6 @@ if __name__ == "__main__":
 			print(restaurant.name.encode('ascii', 'xmlcharrefreplace'))
 			if restaurant.valid:
 				map.add_point( restaurant )
-			if i>5:
-				break
 			# map.add_point( restaurantObject("Holy Cow") )
 
 	with open("AssietteGenevoiseMap.html", "w") as out:

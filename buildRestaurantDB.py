@@ -1,12 +1,15 @@
 #!/usr/bin/env python2
 
 import urllib
+import webbrowser
 import urllib2
 import io
 from bs4 import BeautifulSoup
 import json
 import time
 import gmplot
+import requests
+import re
 
 timeout = 2
 
@@ -41,25 +44,35 @@ def getMetaData(listOfRestaurants,max=-1):
 		tmpRestaurant = {}
 		tmpRestaurant["name"] = restaurantName
 
+
 		tmpRestaurant[ "coordinates" ] = (0,0)
 		tmpRestaurant[ "valid" ] = False
 
-		timeout_start = time.time()
-		while time.time() < timeout_start + timeout:
-			# tmpRestaurant[ "coordinates" ] = gmap.geocode(restaurantName.encode('ascii','replace') + " geneva, switzerland")
-			try:
-				tmpRestaurant[ "coordinates" ] = gmap.geocode(restaurantName.encode('ascii','replace') + " geneva, switzerland")
-				tmpRestaurant[ "valid" ] = True
-				break
-			except:
-				continue
+		# timeout_start = time.time()
+		# while time.time() < timeout_start + timeout:
+		# 	# tmpRestaurant[ "coordinates" ] = gmap.geocode(restaurantName.encode('ascii','replace') + " geneva, switzerland")
+		# 	try:
+		# 		tmpRestaurant[ "coordinates" ] = gmap.geocode(restaurantName.encode('ascii','replace') + " geneva, switzerland")
+		# 		tmpRestaurant[ "valid" ] = True
+		# 		break
+		# 	except:
+		# 		continue
 
-		getRestaurantSite(restaurantName.encode('ascii','replace') )
+		tripAdvisorLink = getRestaurantSite(restaurantName.encode('ascii','replace')+" geneva ", "tripadvisor.com")
+		yelpLink = getRestaurantSite(restaurantName.encode('ascii','replace')+" geneva ", "yelp.com")
+		# print( getTripAdvisorID(tripAdvisorLink) )
+
+		if tripAdvisorLink.startswith("/url?q="):
+			tripAdvisorLink = tripAdvisorLink[7:]
+
+		if tripAdvisorLink:
+			getTripAdvisorMetaData(tripAdvisorLink) 
 
 		tmpRestaurant[ "address" ] = ""
 		tmpRestaurant[ "categories" ] = []
-		tmpRestaurant[ "tripAdvisorLink" ] = ""
-		tmpRestaurant[ "yelpLink" ] = ""
+		tmpRestaurant[ "tripAdvisorLink" ] = tripAdvisorLink
+		tmpRestaurant[ "yelpLink" ] = yelpLink
+		tmpRestaurant[ "website" ] = ""
 		tmpRestaurant[ "description" ] = ""
 
 		listOfRestaurantObjects.append(tmpRestaurant)
@@ -68,19 +81,52 @@ def getMetaData(listOfRestaurants,max=-1):
 
 	return listOfRestaurantObjects
 
+def getTripAdvisorID(url):
+	chunks = url.split("-")
+	for chunk in chunks:
+		if re.match("^d[0-9]{6,9}$", chunk):
+			return chunk[1:]
 
-def getRestaurantSite(name="",site="TripAdvisor"):
-	query = urllib.urlencode({'q' : "%s %s"%(name.encode('ascii','replace'),site)})
-	print(query)
-	# response = urllib2.urlopen ( 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0&' + query ).read()
-	# jsonResponse = json.loads ( response )
-	# print jsonResponse
-	# results = jsonResponse [ 'responseData' ] [ 'results' ]
-	# print results
-	# for result in results:
-	#     title = result['title']
-	#     url = result['url']   # was URL in the original and that threw a name error exception
-	#     print ( title + '; ' + url )
+def getTripAdvisorMetaData(tripAdvisorLink):
+	metadata = {}
+
+	response = requests.get(tripAdvisorLink)
+	soup = BeautifulSoup(response.text, 'html.parser')
+
+	metadata["address"] = soup.find('span', attrs={'class': 'street-address'}).text
+	# print searchResult
+	metadata["rating"] = soup.find('span', attrs={'class': 'ui_bubble_rating'})["content"]
+	print metadata
+
+	print soup.find('span', attrs={'class': 'rating_and_popularity'})
+
+	return metadata
+
+
+def getRestaurantSite(name="",site="tripadvisor.com"):
+
+	text = "%s site:%s"%(name,site)
+	text = urllib.quote_plus(text)
+
+	url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAsjWbCCq9HFUmbFwZ2LILXRlQ11do5rvA&cx=017576662512468239146:omuauf_lfve&q="+text
+
+	print url
+	response = requests.get(url)
+
+	soup = BeautifulSoup(response.text, 'html.parser')
+	print soup
+	searchResults = soup.findAll('div', attrs={'class': 'g'})
+
+	url = ""
+	# url = searchResults[0].a["href"]
+	for i,entry in enumerate(searchResults):
+		if "tripadvisor" in site.lower():
+			if "www.tripadvisor.com/Restaurant_Review-" not in entry.a['href']:
+				continue
+		url = entry.a['href']
+		break
+
+	return url
 
 
 if __name__ == "__main__":
