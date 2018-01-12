@@ -47,15 +47,15 @@ class Map(object):
 	def set_center(self, x, y):
 		self.centerLat = x
 		self.centerLon = y
-	def makeDescription(self):
+	def makeDescription(self,restaurant):
 		try:
-			description = """
-			{address} <br>
-			{phone} <br><br>
-			{rating} Stars on TripAdvisor <br>
-			Price: {price} <br><br>
-			{cuisines} <br><br>
-			<a target="_blank" href={tripAdvisorLink}>TripAdvisor</a>
+			description = \
+			"""{address} <br> \
+			{phone} <br><br> \
+			{rating} Stars on TripAdvisor <br> \
+			Price: {price} <br><br> \
+			{cuisines} <br><br> \
+			<a target='_blank' href='{tripAdvisorLink}'>TripAdvisor</a> \
 			""".format(
 				address = restaurant.address.encode('ascii', 'xmlcharrefreplace'),
 				phone = restaurant.phone.encode('ascii', 'xmlcharrefreplace'),
@@ -94,7 +94,7 @@ class Map(object):
 				lat=restaurant.coordinates[0],
 				lon=restaurant.coordinates[1],
 				name=restaurant.name.encode('ascii', 'xmlcharrefreplace'),
-				description=restaurant.makeDescription()	) for restaurant in self._points
+				description=self.makeDescription(restaurant)	) for restaurant in self._points
 			]
 			)
 		return """
@@ -155,7 +155,7 @@ if __name__ == "__main__":
 	# 			map.add_point( restaurant )
 	# 		# map.add_point( restaurantObject("Holy Cow") )
 
-	with open("AssietteGenevoiseMap.html", "w") as out:
+	with open("index.html", "w") as out:
 		print(map, file=out)
 
 
