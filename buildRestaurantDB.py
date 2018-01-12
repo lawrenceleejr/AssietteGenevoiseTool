@@ -20,7 +20,7 @@ def scrapeAssiette(listOfRestaurants=[],inputPageURL = "http://www.assiettegenev
 	print("### ... %s"%inputPageURL)
 	print("### ")
 
-	page = urllib2.urlopen(inputPageURL,timeout=5)
+	page = urllib2.urlopen(inputPageURL,timeout=10)
 	soup = BeautifulSoup(page, 'html.parser')
 
 	name_box = soup.findAll('div', attrs={'class': 'post-title'})
@@ -44,39 +44,19 @@ def getMetaData(listOfRestaurants,max=-1):
 		tmpRestaurant = {}
 		tmpRestaurant["name"] = restaurantName
 
-
-		tmpRestaurant[ "coordinates" ] = (0,0)
-		tmpRestaurant[ "valid" ] = False
-
-		# timeout_start = time.time()
-		# while time.time() < timeout_start + timeout:
-		# 	# tmpRestaurant[ "coordinates" ] = gmap.geocode(restaurantName.encode('ascii','replace') + " geneva, switzerland")
-		# 	try:
-		# 		tmpRestaurant[ "coordinates" ] = gmap.geocode(restaurantName.encode('ascii','replace') + " geneva, switzerland")
-		# 		tmpRestaurant[ "valid" ] = True
-		# 		break
-		# 	except:
-		# 		continue
-
 		tripAdvisorLink = getRestaurantSite(restaurantName.encode('ascii','replace')+" geneva ", "tripadvisor.com")
 		yelpLink = getRestaurantSite(restaurantName.encode('ascii','replace')+" geneva ", "yelp.com")
-		# print( getTripAdvisorID(tripAdvisorLink) )
-
-		if tripAdvisorLink.startswith("/url?q="):
-			tripAdvisorLink = tripAdvisorLink[7:]
 
 		if tripAdvisorLink:
-			getTripAdvisorMetaData(tripAdvisorLink) 
+			metadata = getTripAdvisorMetaData(tripAdvisorLink)
+			for item in metadata:
+				tmpRestaurant[item] = metadata[item]
 
-		tmpRestaurant[ "address" ] = ""
-		tmpRestaurant[ "categories" ] = []
 		tmpRestaurant[ "tripAdvisorLink" ] = tripAdvisorLink
 		tmpRestaurant[ "yelpLink" ] = yelpLink
-		tmpRestaurant[ "website" ] = ""
-		tmpRestaurant[ "description" ] = ""
 
 		listOfRestaurantObjects.append(tmpRestaurant)
-		if i>max:
+		if i>max and max!=-1:
 			break
 
 	return listOfRestaurantObjects
@@ -94,11 +74,10 @@ def getTripAdvisorMetaData(tripAdvisorLink):
 	soup = BeautifulSoup(response.text, 'html.parser')
 
 	metadata["address"] = soup.find('span', attrs={'class': 'street-address'}).text
-	# print searchResult
 	metadata["rating"] = soup.find('span', attrs={'class': 'ui_bubble_rating'})["content"]
-	print metadata
-
-	print soup.find('span', attrs={'class': 'rating_and_popularity'})
+	metadata["price"] = soup.find('span', attrs={'class': 'rating_and_popularity'}).text
+	metadata["cuisine"] = soup.find('span', attrs={'class': 'header_links rating_and_popularity'}).text.split(", ")
+	metadata["phone"] = soup.find('div', attrs={'class': 'phone'}).text
 
 	return metadata
 
@@ -108,22 +87,21 @@ def getRestaurantSite(name="",site="tripadvisor.com"):
 	text = "%s site:%s"%(name,site)
 	text = urllib.quote_plus(text)
 
-	url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAsjWbCCq9HFUmbFwZ2LILXRlQ11do5rvA&cx=017576662512468239146:omuauf_lfve&q="+text
+	url = "https://www.startpage.com/do/dsearch?query="+text
 
-	print url
 	response = requests.get(url)
 
 	soup = BeautifulSoup(response.text, 'html.parser')
-	print soup
-	searchResults = soup.findAll('div', attrs={'class': 'g'})
+
+	searchResults = soup.findAll('div', attrs={'class': 'result'})
 
 	url = ""
-	# url = searchResults[0].a["href"]
 	for i,entry in enumerate(searchResults):
+		tmpURL = entry.h3.a["href"]
 		if "tripadvisor" in site.lower():
-			if "www.tripadvisor.com/Restaurant_Review-" not in entry.a['href']:
+			if "www.tripadvisor.com/Restaurant_Review-" not in tmpURL:
 				continue
-		url = entry.a['href']
+		url = tmpURL
 		break
 
 	return url
@@ -132,7 +110,7 @@ def getRestaurantSite(name="",site="tripadvisor.com"):
 if __name__ == "__main__":
 	listOfRestaurants = []
 	scrapeAssiette(listOfRestaurants)
-	listOfRestaurantObjects = getMetaData(listOfRestaurants,max=5)
+	listOfRestaurantObjects = getMetaData(listOfRestaurants,max=-1)
 
 	with open('restaurantDB.json', 'w') as outfile:
 	    json.dump(listOfRestaurantObjects, outfile)
