@@ -10,33 +10,33 @@ import json
 
 from collections import namedtuple
 
-def _json_object_hook(d): return namedtuple('X', d.keys())(*d.values())
-def json2obj(data): return json.loads(data, object_hook=_json_object_hook)
+# def _json_object_hook(d): return namedtuple('X', d.keys())(*d.values())
+# def json2obj(data): return json.loads(data, object_hook=_json_object_hook)
 
 # timeout variable can be omitted, if you use specific value in the while condition
 timeout = 2   # [seconds]
 
 
-class restaurantObject(object):
-	def __init__(self,name):
-		self.name = name
-		self.coordinates = (0,0)
-		self.valid = False
+# class restaurantObject(object):
+# 	def __init__(self,name):
+# 		self.name = name
+# 		self.coordinates = (0,0)
+# 		self.valid = False
 
-		timeout_start = time.time()
-		while time.time() < timeout_start + timeout:
-			try:
-				self.coordinates = gmap.geocode(name.encode('ascii','replace') + " geneva")
-				self.valid = True
-				break
-			except:
-				continue
-		self.address = ""
-		self.categories = []
-		self.tripAdvisorLink = ""
-		self.yelpLink = ""
-		self.description = ""
-		return
+# 		timeout_start = time.time()
+# 		while time.time() < timeout_start + timeout:
+# 			try:
+# 				self.coordinates = gmap.geocode(name.encode('ascii','replace') + " geneva")
+# 				self.valid = True
+# 				break
+# 			except:
+# 				continue
+# 		self.address = ""
+# 		self.categories = []
+# 		self.tripAdvisorLink = ""
+# 		self.yelpLink = ""
+# 		self.description = ""
+# 		return
 
 class Map(object):
 	def __init__(self):
@@ -47,6 +47,28 @@ class Map(object):
 	def set_center(self, x, y):
 		self.centerLat = x
 		self.centerLon = y
+	def makeDescription(self):
+		try:
+			description = """
+			{address} <br>
+			{phone} <br><br>
+			{rating} Stars on TripAdvisor <br>
+			Price: {price} <br><br>
+			{cuisines} <br><br>
+			<a target="_blank" href={tripAdvisorLink}>TripAdvisor</a>
+			""".format(
+				address = restaurant.address.encode('ascii', 'xmlcharrefreplace'),
+				phone = restaurant.phone.encode('ascii', 'xmlcharrefreplace'),
+				rating = restaurant.rating.encode('ascii', 'xmlcharrefreplace'),
+				price = restaurant.price.encode('ascii', 'xmlcharrefreplace'),
+				cuisines = ", ".join([x.encode('ascii', 'xmlcharrefreplace') for x in restaurant.cuisine]),
+				tripAdvisorLink = restaurant.tripAdvisorLink.encode('ascii', 'xmlcharrefreplace')
+				)
+		except:
+			description = "No TripAdvisor Information"
+
+		return description
+
 	def __str__(self):
 		markersCode = "\n".join(
 			[
@@ -61,7 +83,7 @@ class Map(object):
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {{
 				return function() {{
-					infowindow.setContent("{name}<br> {name}");
+					infowindow.setContent("<h3>{name}</h3> {description}");
 					infowindow.open(map, marker);
 				}}
 			}})(marker,i) );
@@ -72,7 +94,7 @@ class Map(object):
 				lat=restaurant.coordinates[0],
 				lon=restaurant.coordinates[1],
 				name=restaurant.name.encode('ascii', 'xmlcharrefreplace'),
-				description="test" )  for restaurant in self._points
+				description=restaurant.makeDescription()	) for restaurant in self._points
 			]
 			)
 		return """
@@ -109,13 +131,29 @@ if __name__ == "__main__":
 	map = Map()
 	map.set_center(*genevaCoordinates)
 
-	with io.open('listOfRestaurants.txt','r', encoding='utf-8', errors='replace') as f:
-		for i,line in enumerate(f):
-			restaurant = restaurantObject(line.strip())
-			print(restaurant.name.encode('ascii', 'xmlcharrefreplace'))
-			if restaurant.valid:
-				map.add_point( restaurant )
-			# map.add_point( restaurantObject("Holy Cow") )
+	jsonDB = json.load(open('restaurantDB.json'))
+
+	# print(gmap.geocode("clubhouse geneva")  )
+
+	for item in jsonDB:
+		# print(item["address"].encode('ascii','replace') + " geneva")
+		# item["coordinates"] = gmap.geocode(item["address"].encode('ascii','replace') + " geneva")
+		# item["coordinates"] = gmap.geocode("clubhouse geneva")
+		print(item.keys() )
+		if "coordinates" not in item.keys():
+			continue
+		restaurant = namedtuple('X', item.keys())(*item.values())
+		print(restaurant.name.encode('ascii', 'xmlcharrefreplace'))
+		# if restaurant.valid:
+		map.add_point( restaurant )
+
+	# with io.open('listOfRestaurants.txt','r', encoding='utf-8', errors='replace') as f:
+	# 	for i,line in enumerate(f):
+	# 		restaurant = restaurantObject(line.strip())
+	# 		print(restaurant.name.encode('ascii', 'xmlcharrefreplace'))
+	# 		if restaurant.valid:
+	# 			map.add_point( restaurant )
+	# 		# map.add_point( restaurantObject("Holy Cow") )
 
 	with open("AssietteGenevoiseMap.html", "w") as out:
 		print(map, file=out)

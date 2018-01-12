@@ -10,6 +10,7 @@ import time
 import gmplot
 import requests
 import re
+import unidecode
 
 timeout = 2
 
@@ -44,8 +45,16 @@ def getMetaData(listOfRestaurants,max=-1):
 		tmpRestaurant = {}
 		tmpRestaurant["name"] = restaurantName
 
-		tripAdvisorLink = getRestaurantSite(restaurantName.encode('ascii','replace')+" geneva ", "tripadvisor.com")
-		yelpLink = getRestaurantSite(restaurantName.encode('ascii','replace')+" geneva ", "yelp.com")
+		timeout_start = time.time()
+		while time.time() < timeout_start + timeout:
+			try:
+				tmpRestaurant["coordinates"] = gmap.geocode(unidecode.unidecode(restaurantName) + " geneva")
+				break
+			except:
+				continue
+
+		tripAdvisorLink = getRestaurantSite(unidecode.unidecode(restaurantName)+" geneva ", "tripadvisor")
+		yelpLink = getRestaurantSite(unidecode.unidecode(restaurantName)+" geneva ", "yelp")
 
 		if tripAdvisorLink:
 			metadata = getTripAdvisorMetaData(tripAdvisorLink)
@@ -73,22 +82,43 @@ def getTripAdvisorMetaData(tripAdvisorLink):
 	response = requests.get(tripAdvisorLink)
 	soup = BeautifulSoup(response.text, 'html.parser')
 
-	metadata["address"] = soup.find('span', attrs={'class': 'street-address'}).text
-	metadata["rating"] = soup.find('span', attrs={'class': 'ui_bubble_rating'})["content"]
-	metadata["price"] = soup.find('span', attrs={'class': 'rating_and_popularity'}).text
-	metadata["cuisine"] = soup.find('span', attrs={'class': 'header_links rating_and_popularity'}).text.split(", ")
-	metadata["phone"] = soup.find('div', attrs={'class': 'phone'}).text
+	try:
+		metadata["address"] = soup.find('span', attrs={'class': 'street-address'}).text
+	except:
+		pass
+
+	try:
+		metadata["rating"] = soup.find('span', attrs={'class': 'ui_bubble_rating'})["content"]
+	except:
+		pass
+
+	try:
+		metadata["price"] = soup.find('span', attrs={'class': 'rating_and_popularity'}).text
+	except:
+		pass
+
+	try:
+		metadata["cuisine"] = soup.find('span', attrs={'class': 'header_links rating_and_popularity'}).text.split(", ")
+	except:
+		pass
+
+	try:
+		metadata["phone"] = soup.find('div', attrs={'class': 'phone'}).text
+	except:
+		pass
 
 	return metadata
 
 
-def getRestaurantSite(name="",site="tripadvisor.com"):
+def getRestaurantSite(name="",site="tripadvisor"):
 
-	text = "%s site:%s"%(name,site)
+	# text = "%s site:%s"%(name,site)
+	text = name
 	text = urllib.quote_plus(text)
 
 	url = "https://www.startpage.com/do/dsearch?query="+text
 
+	print url
 	response = requests.get(url)
 
 	soup = BeautifulSoup(response.text, 'html.parser')
@@ -96,14 +126,27 @@ def getRestaurantSite(name="",site="tripadvisor.com"):
 	searchResults = soup.findAll('div', attrs={'class': 'result'})
 
 	url = ""
-	for i,entry in enumerate(searchResults):
-		tmpURL = entry.h3.a["href"]
-		if "tripadvisor" in site.lower():
-			if "www.tripadvisor.com/Restaurant_Review-" not in tmpURL:
-				continue
-		url = tmpURL
-		break
 
+	timeout_start = time.time()
+	while time.time() < timeout_start + 3 and url=="":
+		for i,entry in enumerate(searchResults):
+			try:
+				tmpURL = entry.h3.a["href"]
+			except:
+				continue
+			if "tripadvisor" in site.lower():
+				if "Restaurant_Review-" not in tmpURL:
+					continue
+			if "yelp" in site.lower():
+				if "yelp" not in tmpURL:
+					continue
+			url = tmpURL
+			break
+
+	# if url=="":
+	# 	print soup
+
+	print url
 	return url
 
 
