@@ -2,41 +2,14 @@
 
 from __future__ import print_function
 import io
-
 import gmplot
 import time
-
 import json
-
 from collections import namedtuple
 
-# def _json_object_hook(d): return namedtuple('X', d.keys())(*d.values())
-# def json2obj(data): return json.loads(data, object_hook=_json_object_hook)
 
 # timeout variable can be omitted, if you use specific value in the while condition
 timeout = 2   # [seconds]
-
-
-# class restaurantObject(object):
-# 	def __init__(self,name):
-# 		self.name = name
-# 		self.coordinates = (0,0)
-# 		self.valid = False
-
-# 		timeout_start = time.time()
-# 		while time.time() < timeout_start + timeout:
-# 			try:
-# 				self.coordinates = gmap.geocode(name.encode('ascii','replace') + " geneva")
-# 				self.valid = True
-# 				break
-# 			except:
-# 				continue
-# 		self.address = ""
-# 		self.categories = []
-# 		self.tripAdvisorLink = ""
-# 		self.yelpLink = ""
-# 		self.description = ""
-# 		return
 
 class Map(object):
 	def __init__(self):
@@ -133,12 +106,7 @@ if __name__ == "__main__":
 
 	jsonDB = json.load(open('restaurantDB.json'))
 
-	# print(gmap.geocode("clubhouse geneva")  )
-
 	for item in jsonDB:
-		# print(item["address"].encode('ascii','replace') + " geneva")
-		# item["coordinates"] = gmap.geocode(item["address"].encode('ascii','replace') + " geneva")
-		# item["coordinates"] = gmap.geocode("clubhouse geneva")
 		print(item.keys() )
 		if "coordinates" not in item.keys():
 			continue
@@ -147,16 +115,6 @@ if __name__ == "__main__":
 		# if restaurant.valid:
 		map.add_point( restaurant )
 
-	# with io.open('listOfRestaurants.txt','r', encoding='utf-8', errors='replace') as f:
-	# 	for i,line in enumerate(f):
-	# 		restaurant = restaurantObject(line.strip())
-	# 		print(restaurant.name.encode('ascii', 'xmlcharrefreplace'))
-	# 		if restaurant.valid:
-	# 			map.add_point( restaurant )
-	# 		# map.add_point( restaurantObject("Holy Cow") )
-
 	with open("index.html", "w") as out:
 		print(map, file=out)
-
-
 

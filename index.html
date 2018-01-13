@@ -57,7 +57,7 @@
 
 
 			marker = new google.maps.Marker({
-				position: new google.maps.LatLng(46.2056555, 6.140652),
+				position: new google.maps.LatLng(46.2055691, 6.1411642),
 				map: map,
 				clickable: true,
 				title: "Caf&#233; Calla (Mandarin Oriental) "
@@ -66,6 +66,25 @@
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
 					infowindow.setContent("<h3>Caf&#233; Calla (Mandarin Oriental) </h3> quai Turrettini 1 <br> 			+41 22 909 00 00 <br><br> 			4 Stars on TripAdvisor <br> 			Price: $$$$ <br><br> 			Swiss, European, Gluten Free Options <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d6685775-Reviews-Cafe_Calla_at_Mandarin_Oriental-Geneva.html'>TripAdvisor</a> 			");
+					infowindow.open(map, marker);
+				}
+			})(marker,i) );
+
+			i = i+1
+
+			
+
+
+			marker = new google.maps.Marker({
+				position: new google.maps.LatLng(46.2019132, 6.1555294),
+				map: map,
+				clickable: true,
+				title: "Planet Caviar"
+				});
+
+			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
+				return function() {
+					infowindow.setContent("<h3>Planet Caviar</h3> rue Louis-Duchosal 7 <br> 			+41 22 840 40 85 <br><br> 			4 Stars on TripAdvisor <br> 			Price: $$$$ <br><br> 			Seafood, Mediterranean <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d4551336-Reviews-Planet_Caviar-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -160,7 +179,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Auberge de Confignon</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Auberge de Confignon</h3> place de l' Eglise 6 <br> 			+41 22 757 19 44 <br><br> 			4.5 Stars on TripAdvisor <br> 			Price: &#8364;&#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g4278006-d4079702-Reviews-Bistro_de_Confignon-Confignon.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -179,7 +198,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Auberge de Compesi&#232;res</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Auberge de Compesi&#232;res</h3> route de Cugny 75 <br> 			+ Ajouter le num&#233;ro de t&#233;l&#233;phone <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise <br><br> 			<a target='_blank' href='https://www.tripadvisor.fr/Restaurant_Review-g188057-d3726855-Reviews-Auberge_de_Compesieres-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -236,7 +255,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Vanity</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Vanity</h3> place du molard,9 <br> 			+41 79 157 89 36 <br><br> 			5 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Italienne, Fran&#231;aise, Internationale <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d13122497-Reviews-Vanity-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -331,7 +350,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Caf&#233; - Restaurant du Quai</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Caf&#233; - Restaurant du Quai</h3> Le Quai 10 <br> 			+41 22 751 40 00 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, Suisse, Europ&#233;enne <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g1006501-d8272793-Reviews-Cafe_Restaurant_du_Quai-Hermance.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -388,7 +407,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Le Socrate</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Le Socrate</h3> rue Micheli-du-Crest 6 <br> 			+41 78 664 67 78 <br><br> 			4 Stars on TripAdvisor <br> 			Price: $$ - $$$ <br><br> 			French, European <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d812011-Reviews-Le_Socrate-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -464,7 +483,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Garden Fifteen</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Garden Fifteen</h3> Chemin Marc Charrot 2 <br> 			+41 22 771 33 39 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise <br><br> 			<a target='_blank' href='https://www.tripadvisor.fr/Restaurant_Review-g1096098-d11695466-Reviews-Gardenfifteen-Plan_Les_Ouates_Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -559,7 +578,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Le Comptoir Canaille</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Le Comptoir Canaille</h3> boulevard Carl-Vogt 45 <br> 			+41 22 321 91 10 <br><br> 			4 Stars on TripAdvisor <br> 			Price: $$ - $$$ <br><br> 			French, European <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d6395839-Reviews-Le_Comptoir_Canaille-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -654,7 +673,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Restaurant de Philom&#232;ne</h3> rue de Chene-Bougeries 2 <br> 			+41 22 349 10 12 <br><br> 			4.5 Stars on TripAdvisor <br> 			Price: $$ - $$$ <br><br> 			Swiss, European, Vegetarian Friendly <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d799587-Reviews-Le_Gruyerien-Geneva.html'>TripAdvisor</a> 			");
+					infowindow.setContent("<h3>Restaurant de Philom&#232;ne</h3> Rue du Gothard 1 <br> 			+41 22 349 49 69 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, Europ&#233;enne <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g2011469-d813490-Reviews-Le_Restaurant_de_Philomene-Chene_Bourg.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -711,7 +730,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Mangiare Italiano</h3> route des Acacias 4 <br> 			+41 22 300 62 15 <br><br> 			3.5 Stars on TripAdvisor <br> 			Price: $$ - $$$ <br><br> 			Italian <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d10072878-Reviews-Mangiare_Italiano-Geneva.html'>TripAdvisor</a> 			");
+					infowindow.setContent("<h3>Mangiare Italiano</h3> route des Acacias 4 <br> 			+41 22 300 62 15 <br><br> 			3,5 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Italienne <br><br> 			<a target='_blank' href='https://www.tripadvisor.fr/Restaurant_Review-g188057-d10072878-Reviews-Mangiare_Italiano-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -730,7 +749,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Le Petit Bordelais</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Le Petit Bordelais</h3> rue du Contrat-Social 6 <br> 			+41 22 340 51 68 <br><br> 			4.5 Stars on TripAdvisor <br> 			Price: Fran&#231;aise, Suisse, Internationale <br><br> 			Fran&#231;aise, Suisse, Internationale <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d10466339-Reviews-Le_Petit_Bordelais-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -882,7 +901,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Ch&#226;teau de Genthod</h3> route du Creux-de-Genthod 29 <br> 			+41 22 774 10 06 <br><br> 			4 Stars on TripAdvisor <br> 			Price: $$ - $$$ <br><br> 			French, Swiss, European <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d1044926-Reviews-Restaurant_du_Creux_de_Genthod-Geneva.html'>TripAdvisor</a> 			");
+					infowindow.setContent("<h3>Ch&#226;teau de Genthod</h3> route de Rennex 1 <br> 			+41 22 774 19 20 <br><br> 			3 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d3737606-Reviews-Chateau_de_Genthod-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -977,7 +996,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>O Trois Ch&#234;nes</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>O Trois Ch&#234;nes</h3> Rue de Geneve 1 <br> 			+41 22 348 21 20 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, Bar &#224; bi&#232;res, Suisse <br><br> 			<a target='_blank' href='https://www.tripadvisor.fr/Restaurant_Review-g188057-d3957015-Reviews-Restaurant_Grand_Chene-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -996,7 +1015,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Le Tilleul</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Le Tilleul</h3> avenue des Tilleuls 2 <br> 			+41 22 344 59 19 <br><br> 			4 Stars on TripAdvisor <br> 			Price: $$ - $$$ <br><br> 			Italian, Mediterranean, European <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d1656516-Reviews-Les_Tilleuls-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1015,7 +1034,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Le Relais Champagnard</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Le Relais Champagnard</h3> Route de Chancy 404 <br> 			+41 22 756 25 56 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Suisse, Europ&#233;enne <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g3373462-d4150660-Reviews-Le_Relais_Champagnard-Cartigny.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1053,7 +1072,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Edelweiss (H&#244;tel)</h3> place de la Navigation 2 <br> 			+41 22 544 51 60 <br><br> 			4 Stars on TripAdvisor <br> 			Price: $$ - $$$ <br><br> 			Swiss, European, Vegetarian Friendly <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d1044937-Reviews-Restaurant_Edelweiss-Geneva.html'>TripAdvisor</a> 			");
+					infowindow.setContent("<h3>Edelweiss (H&#244;tel)</h3> place de la Navigation 2 <br> 			+41 22 544 51 60 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Suisse, Europ&#233;enne, V&#233;g&#233;tariens bienvenus <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d1044937-Reviews-Restaurant_Edelweiss-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1148,7 +1167,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>La Conca d'Oro</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>La Conca d'Oro</h3> rue de la Terrassiere 22 <br> 			022+700+48+12 <br><br> 			3.5 Stars on TripAdvisor <br> 			Price: $$ - $$$ <br><br> 			Italian, Pizza, Mediterranean <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d4308072-Reviews-La_Conca_d_Oro-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1167,7 +1186,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>La Bricole</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>La Bricole</h3> route de Chancy 76 <br> 			+41 22 870 05 07 <br><br> 			4 Stars on TripAdvisor <br> 			Price: Italienne <br><br> 			Italienne <br><br> 			<a target='_blank' href='https://www.tripadvisor.fr/Restaurant_Review-g188057-d3653355-Reviews-La_Bricole-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1254,25 +1273,6 @@
 
 
 			marker = new google.maps.Marker({
-				position: new google.maps.LatLng(46.2031567, 6.1493842),
-				map: map,
-				clickable: true,
-				title: "Le Thermom&#232;tre"
-				});
-
-			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
-				return function() {
-					infowindow.setContent("<h3>Le Thermom&#232;tre</h3> rue Neuve-du-Molard 22 <br> 			+41 22 310 25 35 <br><br> 			4.5 Stars on TripAdvisor <br> 			Price: $$ - $$$ <br><br> 			French, Swiss, European <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d1308582-Reviews-Le_Thermometre-Geneva.html'>TripAdvisor</a> 			");
-					infowindow.open(map, marker);
-				}
-			})(marker,i) );
-
-			i = i+1
-
-			
-
-
-			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(46.194596, 6.192115),
 				map: map,
 				clickable: true,
@@ -1300,7 +1300,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Kaopi</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Kaopi</h3> Rue de Rive 6 <br> 			+41 22 311 47 47 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, Caf&#233;, Moderne <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d10162592-Reviews-L_Oranger-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1319,7 +1319,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>P&#233;kin Palace</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>P&#233;kin Palace</h3> rue des Alpes 22 <br> 			+41 22 900 28 88 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Chinoise, Asiatique, V&#233;g&#233;tariens bienvenus <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d9802240-Reviews-Pekin_Palace-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1376,7 +1376,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>As De Pique</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>As De Pique</h3> Place de l'Eglise 6 <br> 			+41 22 784 17 10 <br><br> 			3,5 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, Italienne, Pizza <br><br> 			<a target='_blank' href='https://www.tripadvisor.fr/Restaurant_Review-g954047-d7191642-Reviews-As_de_Pique-Veyrier.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1452,7 +1452,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Racer Caf&#233;</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Racer Caf&#233;</h3> 25, Route des Acacias <br> 			+41 22 301 44 44 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, M&#233;diterran&#233;enne <br><br> 			<a target='_blank' href='https://www.tripadvisor.fr/Restaurant_Review-g188057-d11958906-Reviews-Racer_Cafe-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1566,7 +1566,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>La Croix Verte</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>La Croix Verte</h3> rue Perdtemps 7 <br> 			+41 22 361 15 39 <br><br> 			3.5 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Italienne, Pizza, M&#233;diterran&#233;enne <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g198830-d798548-Reviews-La_Croix_Verte-Nyon_Nyon_District_Canton_of_Vaud.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1585,7 +1585,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Auberge de la Poste</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Auberge de la Poste</h3> rue de la Gare 8 <br> 			+41 24 492 31 24 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Suisse, Europ&#233;enne, V&#233;g&#233;tariens bienvenus <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g199031-d3524633-Reviews-Auberge_de_la_Poste_Restaurant-Les_Diablerets_Canton_of_Vaud.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1604,7 +1604,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Restaurant de l'Union</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Restaurant de l'Union</h3> route de Veyrier 269 <br> 			+41 22 784 17 25 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, Europ&#233;enne, Barbecue/Grillades <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g954047-d7194135-Reviews-Cafe_Bersier_A_L_Union-Veyrier.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1851,7 +1851,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Le 111</h3> route de l' Aeroport 13 <br> 			+41 22 817 46 09 <br><br> 			3 Stars on TripAdvisor <br> 			Price: $$$$ <br><br> 			Swiss, European, Vegetarian Friendly <br><br> 			<a target='_blank' href='https://www.tripadvisor.com/Restaurant_Review-g188057-d10214624-Reviews-Le_Chef-Geneva.html'>TripAdvisor</a> 			");
+					infowindow.setContent("<h3>Le 111</h3> 111 Rue du centre <br> 			+33 4 50 85 06 25 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Moderne, Fran&#231;aise, Europ&#233;enne <br><br> 			<a target='_blank' href='https://www.tripadvisor.fr/Restaurant_Review-g1527993-d1528880-Reviews-Le_111-Douvaine_Haute_Savoie_Auvergne_Rhone_Alpes.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -1889,7 +1889,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Restaurant Les Fraisiers</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Restaurant Les Fraisiers</h3> Avenue du Cur&#233; Baud 84 <br> 			+41 22 794 64 74 <br><br> 			4.5 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Steakhouse, V&#233;g&#233;tariens bienvenus <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d10451326-Reviews-Les_Fraisiers-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -2212,7 +2212,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>La Cantine</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>La Cantine</h3> Boulevard Carl-Vogt 29 <br> 			+41 22 328 16 70 <br><br> 			4.5 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, M&#233;diterran&#233;enne, V&#233;g&#233;tariens bienvenus <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d2524789-Reviews-Cantine_des_Commercants-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -2231,7 +2231,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>La Piscine du Lignon</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>La Piscine du Lignon</h3> route du Bois-des-Freres 30 <br> 			+41 22 796 10 47 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g4346525-d6895749-Reviews-Restaurant_de_la_Piscine_du_Lignon-Vernier_Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -2250,7 +2250,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Auberge du Grand Lancy</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Auberge du Grand Lancy</h3> route du Grand-Lancy 66 <br> 			+41 22 794 16 98 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Italienne, Fran&#231;aise <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d785323-Reviews-Auberge_de_Grand_Lancy-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -2440,7 +2440,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Le Parfum D&#8217;asie</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Le Parfum D&#8217;asie</h3> rue de Geneve 84 <br> 			+41 22 349 09 60 <br><br> 			4.5 Stars on TripAdvisor <br> 			Price: &#8364;&#8364; - &#8364;&#8364;&#8364; <br><br> 			Chinoise, Asiatique <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d8145787-Reviews-Le_parfum_d_Asie-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -2668,7 +2668,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>La Pagerie</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>La Pagerie</h3> 12 Rue de la Lib&#233;ration <br> 			+33 4 50 38 34 00 <br><br> 			4.5 Stars on TripAdvisor <br> 			Price: &#8364;&#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, Europ&#233;enne <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g196702-d1807701-Reviews-La_Pagerie-Gaillard_Annemasse_Haute_Savoie_Auvergne_Rhone_Alpes.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
@@ -2698,7 +2698,7 @@
 
 
 			marker = new google.maps.Marker({
-				position: new google.maps.LatLng(41.8939063, -88.3415308),
+				position: new google.maps.LatLng(42.6056664, -88.4291249),
 				map: map,
 				clickable: true,
 				title: "Cz Pizza"
@@ -2744,7 +2744,7 @@
 
 			google.maps.event.addListener(marker, 'click', ( function(marker,i) {
 				return function() {
-					infowindow.setContent("<h3>Prizreni Grill</h3> No TripAdvisor Information");
+					infowindow.setContent("<h3>Prizreni Grill</h3> quai du Mont-Blanc 19 <br> 			+41 22 908 92 20 <br><br> 			4 Stars on TripAdvisor <br> 			Price: &#8364;&#8364;&#8364;&#8364; <br><br> 			Fran&#231;aise, Steakhouse, Europ&#233;enne <br><br> 			<a target='_blank' href='https://fr.tripadvisor.ch/Restaurant_Review-g188057-d1370536-Reviews-Le_Grill-Geneva.html'>TripAdvisor</a> 			");
 					infowindow.open(map, marker);
 				}
 			})(marker,i) );
